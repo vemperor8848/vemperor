@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./imprints-grid.module.css";
 
 type Imprint = {
@@ -19,14 +19,19 @@ export default function ImprintsGrid({ collection }: { collection: Imprint }) {
 		setShow(true);
 	};
 
-	const close = () => setShow(false);
+	const close = useCallback(() => setShow(false), []);
 
-	const next = () =>
-		setIndex((prev) => (prev + 1) % collection.pictures.length);
-	const prev = () =>
-		setIndex((prev) =>
-			prev === 0 ? collection.pictures.length - 1 : prev - 1,
-		);
+	const next = useCallback(
+		() => setIndex((prev) => (prev + 1) % collection.pictures.length),
+		[collection.pictures.length],
+	);
+	const prev = useCallback(
+		() =>
+			setIndex((prev) =>
+				prev === 0 ? collection.pictures.length - 1 : prev - 1,
+			),
+		[collection.pictures.length],
+	);
 
 	useEffect(() => {
 		if (!show) return;
@@ -37,7 +42,7 @@ export default function ImprintsGrid({ collection }: { collection: Imprint }) {
 		};
 		window.addEventListener("keydown", handle);
 		return () => window.removeEventListener("keydown", handle);
-	}, [show]);
+	}, [show, close, next, prev]);
 
 	return (
 		<>

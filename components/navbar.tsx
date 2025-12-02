@@ -1,4 +1,4 @@
-import { Button, Menu } from "@/components";
+import { Menu } from "@/components";
 
 export default function Navbar() {
 	return (

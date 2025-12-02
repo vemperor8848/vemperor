@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Button from "./button";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { flowCurveTextWhite } from "@/public";

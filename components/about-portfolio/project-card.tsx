@@ -1,14 +1,15 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import type { StaticImageData } from "next/image";
 
-export default function ProjectCard({
-	item,
-	index,
-	setModal,
-}: {
-	item: any;
+type ProjectCardProps = {
+	item: {
+		href: string;
+		img: StaticImageData | string;
+		title: string;
+	};
 	index: number;
 	setModal: Dispatch<
 		SetStateAction<{
@@ -16,7 +17,13 @@ export default function ProjectCard({
 			index: number;
 		}>
 	>;
-}) {
+};
+
+export default function ProjectCard({
+	item,
+	index,
+	setModal,
+}: ProjectCardProps) {
 	return (
 		<div
 			className="relative w-full h-full"

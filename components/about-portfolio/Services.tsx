@@ -2,39 +2,39 @@
 import { gsap } from "gsap";
 import Image from "next/image";
 import Lenis from "lenis";
-import { servicesItem } from "@portfolio/constants";
 import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { servicesItem } from "@portfolio/constants";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const transforms = [
+	[
+		[10, 50, -10, 10],
+		[20, -10, -45, 10],
+	],
+	[
+		[0, 47.5, -10, 15],
+		[-25, 15, -45, 30],
+	],
+	[
+		[0, 52.5, -10, 5],
+		[15, -5, -40, 60],
+	],
+	[
+		[10, 50, -10, 10],
+		[20, -10, -45, 90],
+	],
+	[
+		[0, 55, -15, 30],
+		[25, -15, 60, 120],
+	],
+];
 
 export default function Services() {
 	const cardsRef = useRef<HTMLDivElement[]>([]);
 	const stickyHeaderRef = useRef<HTMLDivElement>(null);
 	const stickySectionRef = useRef<HTMLDivElement>(null);
-
-	const transforms = [
-		[
-			[10, 50, -10, 10],
-			[20, -10, -45, 10],
-		],
-		[
-			[0, 47.5, -10, 15],
-			[-25, 15, -45, 30],
-		],
-		[
-			[0, 52.5, -10, 5],
-			[15, -5, -40, 60],
-		],
-		[
-			[10, 50, -10, 10],
-			[20, -10, -45, 90],
-		],
-		[
-			[0, 55, -15, 30],
-			[25, -15, 60, 120],
-		],
-	];
 
 	useEffect(() => {
 		const stickyHeight = window.innerHeight * 5;

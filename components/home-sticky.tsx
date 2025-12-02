@@ -1,27 +1,28 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Sticky() {
 	const cursorSize = 100;
-	const mouse = {
-		x: useMotionValue(0),
-		y: useMotionValue(0),
-	};
-	const [isVisible, setIsVisible] = useState(false); // New state for visibility
+	const mouseX = useMotionValue(0);
+	const mouseY = useMotionValue(0);
+	const [isVisible, setIsVisible] = useState(false);
 
 	const smoothOptions = { damping: 20, stiffness: 300, mass: 0.5 };
 	const smoothMouse = {
-		x: useSpring(mouse.x, smoothOptions),
-		y: useSpring(mouse.y, smoothOptions),
+		x: useSpring(mouseX, smoothOptions),
+		y: useSpring(mouseY, smoothOptions),
 	};
 
-	const manageMouseMove = (e: MouseEvent) => {
-		const { clientX, clientY } = e;
-		mouse.x.set(clientX - cursorSize / 2.1);
-		mouse.y.set(clientY - cursorSize / 3.5);
-	};
+	const manageMouseMove = useCallback(
+		(e: MouseEvent) => {
+			const { clientX, clientY } = e;
+			mouseX.set(clientX - cursorSize / 2.1);
+			mouseY.set(clientY - cursorSize / 3.5);
+		},
+		[cursorSize, mouseX, mouseY],
+	);
 
 	useEffect(() => {
 		const sliderContainers = document.querySelectorAll(".slider-container");
@@ -49,7 +50,7 @@ export default function Sticky() {
 		};
 	}, [manageMouseMove]);
 
-	if (!isVisible) return null; // Only render if visible
+	if (!isVisible) return null;
 
 	return (
 		<motion.div
