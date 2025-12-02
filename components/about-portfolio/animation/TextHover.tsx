@@ -7,7 +7,10 @@ export default function TextHover({
 	subTitle2,
 }: TtextHoverProps) {
 	return (
-		<div className="group flex gap-x-[20px] overflow-hidden cursor-pointer transition-all ease-in-out duration-200">
+		<div
+			className="group flex gap-x-[20px] overflow-hidden cursor-pointer transition-all ease-in-out duration-200"
+			translate="no"
+			suppressHydrationWarning>
 			<div className="relative transition-all  ease-in-out duration-500">
 				<div className="">
 					<h1 className="text-[40px] translate-y-[-100%] group-hover:translate-y-[0%] absolute  left-0 transition-all ease-in-out duration-500 flex">
